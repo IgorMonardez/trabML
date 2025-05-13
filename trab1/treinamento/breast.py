@@ -1,14 +1,27 @@
 from sklearn.model_selection import StratifiedKFold, cross_val_score, cross_validate, GridSearchCV
 from sklearn.tree import DecisionTreeClassifier
-from ucimlrepo import fetch_ucirepo
 import numpy as np
+import pandas as pd
 
-# fetch dataset
-breast_cancer = fetch_ucirepo(id=17)
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data"
+colunas = [
+    'id', 'diagnosis',
+    'radius_mean', 'texture_mean', 'perimeter_mean', 'area_mean', 'smoothness_mean',
+    'compactness_mean', 'concavity_mean', 'concave_points_mean', 'symmetry_mean',
+    'fractal_dimension_mean', 'radius_se', 'texture_se', 'perimeter_se', 'area_se',
+    'smoothness_se', 'compactness_se', 'concavity_se', 'concave_points_se',
+    'symmetry_se', 'fractal_dimension_se', 'radius_worst', 'texture_worst',
+    'perimeter_worst', 'area_worst', 'smoothness_worst', 'compactness_worst',
+    'concavity_worst', 'concave_points_worst', 'symmetry_worst', 'fractal_dimension_worst'
+]
 
-# data (as pandas dataframes)
-X = breast_cancer.data.features
-y = breast_cancer.data.targets
+df = pd.read_csv(url, header=None, names=colunas)
+# Substituir '?' por NaN
+df.replace('?', np.nan, inplace=True)
+df_limpo = df.dropna(axis=0)
+
+X = df_limpo.drop(columns=['id', 'diagnosis'])
+y = df_limpo['diagnosis']
 
 param_grid = {
     'max_depth': [2, 3, 4, 5],
