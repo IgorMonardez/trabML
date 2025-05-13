@@ -17,14 +17,14 @@ y = iris.data.targets
 # Via treinamento e teste
 X_train, X_test, y_train, y_test = train_test_split(
     X, y,
-    test_size=0.5,
+    test_size=0.3,
     random_state=42
 )
 
 # Inicializar a árvore de decisão
 clf = DecisionTreeClassifier(
     criterion='gini',  # ou 'entropy' para ganho de informação
-    max_depth=2,        # profundidade máxima
+    max_depth=3,        # profundidade máxima
     min_samples_leaf=1,
     random_state=42
 )
