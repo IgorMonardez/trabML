@@ -16,7 +16,6 @@ colunas = [
 ]
 
 df = pd.read_csv(url, header=None, names=colunas)
-# Substituir '?' por NaN
 df.replace('?', np.nan, inplace=True)
 df_limpo = df.dropna(axis=0)
 
@@ -29,13 +28,8 @@ param_grid = {
     'min_samples_leaf': [1, 5, 10, 15, 20],
 }
 
-# Inicializar a árvore de decisão
 clf = DecisionTreeClassifier(random_state=42)
 
-
-
-
-# Definir a validação cruzada (10 folds)
 grid_search = GridSearchCV(
     estimator= clf,
     param_grid=param_grid,
@@ -45,7 +39,6 @@ grid_search = GridSearchCV(
 
 grid_search.fit(X, y)
 
-# Resultados
 print("Melhores hiperparâmetros: ", grid_search.best_params_)
 print("Melhor acurácia: ", grid_search.best_score_)
 
@@ -59,18 +52,11 @@ clf = DecisionTreeClassifier(
 )
 
 
-cv = StratifiedKFold(n_splits=30, shuffle=True, random_state=42)  # Mantém a proporção das classes
+cv = StratifiedKFold(n_splits=30, shuffle=True, random_state=42)
 
-# Executar cross-validation
 results = cross_validate(clf, X, y, cv=cv, scoring=scoring)
 
-# Exibir resultados
 for metric in scoring:
     mean_score = np.mean(results[f'test_{metric}'])
     std_score = np.std(results[f'test_{metric}'])
     print(f"{metric}: {mean_score:.3f} (±{std_score:.3f})")
-
-# for metric in scoring:
-#     mean_score = np.mean(scores[f'test_{metric}'])
-#     std_score = np.std(scores[f'test_{metric}'])
-#     print(f"{metric}: {mean_score:.3f} (±{std_score:.3f})")
