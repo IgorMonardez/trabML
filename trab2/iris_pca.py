@@ -4,6 +4,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+
 #carregar dataset iris
 iris = fetch_ucirepo(id=53)
 
