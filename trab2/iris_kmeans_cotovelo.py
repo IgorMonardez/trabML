@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 iris = fetch_ucirepo(id=53)
 
 X = iris.data.features
+X = X[['petal length', 'petal width']]
 y = iris.data.targets
 
 
@@ -23,4 +24,4 @@ plt.ylabel('Inércia (WCSS)')
 plt.xticks(range(1, 11))
 plt.grid(True)
 plt.tight_layout()
-plt.savefig("./graficos/kmeans_cotovelo")
+plt.savefig("./graficos/kmeans_cotovelo_2_features")

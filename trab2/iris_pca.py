@@ -1,7 +1,6 @@
 from ucimlrepo import fetch_ucirepo
 from sklearn.decomposition import PCA
 import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
 
 
@@ -9,6 +8,7 @@ import matplotlib.pyplot as plt
 iris = fetch_ucirepo(id=53)
 
 X = iris.data.features
+X = X[['petal length', 'petal width']]
 y = iris.data.targets
 
 pca = PCA(n_components=2)
@@ -21,4 +21,4 @@ plt.xlabel('Componente Principal 1')
 plt.ylabel('Componente Principal 2')
 plt.grid(True)
 plt.tight_layout()
-plt.savefig("./graficos/PCA_sem_rotulos")
+plt.savefig("./graficos/PCA_sem_rotulos_2_features")

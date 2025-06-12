@@ -9,6 +9,7 @@ from sklearn.metrics import silhouette_score, adjusted_rand_score
 iris = fetch_ucirepo(id=53)
 
 X = iris.data.features
+X = X[['petal length', 'petal width']]
 y = iris.data.targets
 
 for i in range(2,4):
@@ -37,7 +38,7 @@ for i in range(2,4):
     plt.legend(title='Clusters', loc='best')
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig(f"./graficos/kmeans{i}")
+    plt.savefig(f"./graficos/kmeans_2_features_{i}_clusters")
 
     sil_score = silhouette_score(X, y_kmeans)
     ari = adjusted_rand_score(y.values.ravel(), y_kmeans)

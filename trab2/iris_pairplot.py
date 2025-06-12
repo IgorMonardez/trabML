@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 iris = fetch_ucirepo(id=53)
 
 X = iris.data.features
+X = X[['petal length', 'petal width']]
 y = iris.data.targets
 
 # sns.pairplot(pd.DataFrame(X, columns=iris.feature_names), diag_kind='kde')
@@ -15,4 +16,4 @@ y = iris.data.targets
 
 df = pd.DataFrame(X, columns=iris.feature_names)
 sns.pairplot(df[['petal length', 'petal width']], diag_kind='kde')
-plt.savefig("./graficos/pairplot_petal")
+plt.savefig("./graficos/pairplot_petal_2_features")

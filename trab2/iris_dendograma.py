@@ -6,6 +6,7 @@ from ucimlrepo import fetch_ucirepo
 iris = fetch_ucirepo(id=53)
 
 X = iris.data.features
+X = X[['petal length', 'petal width']]
 y = iris.data.targets
 
 linked = linkage(X, method='ward')
@@ -17,4 +18,4 @@ plt.xlabel('Amostras ou subgrupos')
 plt.ylabel('Distância (Ward)')
 plt.grid(True)
 plt.tight_layout()
-plt.savefig("./graficos/Dendograma")
+plt.savefig("./graficos/Dendograma_2_features")
